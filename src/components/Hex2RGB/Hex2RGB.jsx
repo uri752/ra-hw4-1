@@ -2,14 +2,16 @@ import React from 'react';
 import { useState } from 'react';
 import hex2Rgb from './../../hex2Rgb.js';
 import changeLightness from './../../changeLightness.js';
-const ERROR_BG_COLOR = 'rgb(100,100,100)';
+
+const ERROR_BG_COLOR = 'rgb(100, 50, 50)';
 const DEFAULT_COLOR = 'rgb(255,255,255)';
+const DEFAULT_COLOR_TEXT = 'rgb(0,0,0)';
 
 export default function Hex2RGB() {
 
     const [hex, setHex] = useState('#');
     const [rgb, setRgb] = useState('');
-    const [isError, setIsError] = useState(false);
+    const [isError, setIsError] = useState(false);    
 
     const handleColorHexChange = event => {
         const { value } = event.target;
@@ -18,8 +20,8 @@ export default function Hex2RGB() {
             setRgb('');
             setIsError(false);
         }
-        if (value.length === 7) {
-            const res = hex2Rgb(value);
+        if (value.length === 7) {            
+            const res = hex2Rgb(value);            
             setRgb(res || ERROR_BG_COLOR);
             if(!res) setIsError(true);
         }
@@ -36,8 +38,8 @@ export default function Hex2RGB() {
 
             <input 
                 type='text'
-                className='colorRGB'
-                style={{background: rgb ? changeLightness(rgb,10) : DEFAULT_COLOR}}
+                className='colorRGB'                            
+                style= { {background: ( rgb ? changeLightness(rgb,10) : DEFAULT_COLOR ), color: ( rgb ? changeLightness(rgb,-50) : DEFAULT_COLOR_TEXT ) }}                              
                 id='colorRGB' name='colorRGB'                
                 value={isError ? 'Ошибка' : rgb}/>
 

@@ -1,7 +1,8 @@
-export default function changeLightness (rgb, persent) {
+export default function changeLightness (rgb, percent) {
+    
     const [, red, green, blue] = /^rgb\((\d+), (\d+), (\d+)\)$/i.exec(rgb);
     const hsl = rgbToHSL([red, green, blue]);
-    hsl.l -= persent/100
+    hsl.l -= percent/100
 
     if (hsl.h > 1) {
         hsl.h -= 1;
